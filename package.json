@@ -1,0 +1,25 @@
+{
+  "name": "exhaustive-list",
+  "version": "0.0.1",
+  "description": "Simple library to check whether the list is exhaustive",
+  "main": "index.js",
+  "scripts": {
+    "format": "./node_modules/.bin/prettier --write \"{,!(node_modules)/**/}*.js\"",
+    "test": "jest",
+    "test-watch-all": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/yihyang/exhaustive-list.git"
+  },
+  "author": "Yih Yang <yyngo788n88@hotmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yihyang/exhaustive-list/issues"
+  },
+  "homepage": "https://github.com/yihyang/exhaustive-list#readme",
+  "devDependencies": {
+    "jest": "^29.2.1",
+    "prettier": "^2.7.1"
+  }
+}
