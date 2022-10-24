@@ -13,11 +13,15 @@ test("Will throw exception if second argument is not object", () => {
 });
 
 test("Will return true if provided list is empty", () => {
-  expect(isExhaustiveList([])).toBe(true);
+  expect(isExhaustiveList([])).toStrictEqual({
+    result: true
+  });
 });
 
 test("Will return true if provided list contains only 1 item", () => {
-  expect(isExhaustiveList([{ min: 1, max: 2 }])).toBe(true);
+  expect(isExhaustiveList([{ min: 1, max: 2 }])).toStrictEqual({
+    result: true
+  });
 });
 
 test('Will throw expection if provided list is do not contain "min" and "max" key', () => {

@@ -26,7 +26,9 @@
 
     // if the list is empty or only contains 1 item, return true
     if ([0, 1].includes(list.length)) {
-      return true;
+      return {
+        result: true,
+      };
     }
 
     // check whether is it sorted
