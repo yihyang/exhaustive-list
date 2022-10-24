@@ -14,13 +14,13 @@ test("Will throw exception if second argument is not object", () => {
 
 test("Will return true if provided list is empty", () => {
   expect(isExhaustiveList([])).toStrictEqual({
-    result: true
+    result: true,
   });
 });
 
 test("Will return true if provided list contains only 1 item", () => {
   expect(isExhaustiveList([{ min: 1, max: 2 }])).toStrictEqual({
-    result: true
+    result: true,
   });
 });
 
@@ -40,6 +40,37 @@ test('Will not throw expection if provided list contains both "min" and "max" ke
   expect(() => {
     isExhaustiveList([{ min: 1, max: 2 }]);
   }).not.toThrow('The items inside list must contain both "min" and "max" key');
+});
+
+test("Will return error if list contains duplicate items", () => {
+  expect(
+    isExhaustiveList([
+      { min: 0, max: 1 },
+      { min: 0, max: 1 },
+    ])
+  ).toStrictEqual({
+    result: false,
+    errors: {
+      0: ["Duplicated item"],
+      1: ["Duplicated item"],
+    },
+  });
+
+  expect(
+    isExhaustiveList([
+      { min: 0, max: 1 },
+      { min: 0, max: 1 },
+      { min: 3, max: 4 },
+      { min: 0, max: 1 },
+    ])
+  ).toStrictEqual({
+    result: false,
+    errors: {
+      0: ["Duplicated item"],
+      1: ["Duplicated item"],
+      3: ["Duplicated item"],
+    },
+  });
 });
 
 test('Will return error if options "isSorted" is set to true but the list is not sorted', () => {

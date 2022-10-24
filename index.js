@@ -31,6 +31,12 @@
       };
     }
 
+    // check for duplicated items
+    let duplicatedItems = exports.checkDuplicatedItems(list);
+    if (!duplicatedItems.result) {
+      return duplicatedItems;
+    }
+
     // check whether is it sorted
     if (options.isSorted === true && !exports.checkIsSorted(list)) {
       // throw 'The list is not sorted when the "isSorted" flag is true'
@@ -154,6 +160,42 @@
     errors[index] = itemError;
 
     return errors;
+  };
+
+  exports.checkDuplicatedItems = (list) => {
+    let duplicatedItems = [];
+    let itemKeys = {};
+    for (let index = 0; index < list.length; index++) {
+      let item = list[index];
+      let key = item.min + "-" + item.max;
+      // push to list
+      let itemKeysItem = itemKeys[key] || [];
+      itemKeysItem.push(index);
+      itemKeys[key] = itemKeysItem;
+    }
+
+    Object.entries(itemKeys).forEach((entry) => {
+      const [key, value] = entry;
+
+      if (value.length > 1) {
+        duplicatedItems = duplicatedItems.concat(value);
+      }
+    });
+
+    if (duplicatedItems.length) {
+      let errors = {};
+      duplicatedItems.map((item) => {
+        errors[item] = ["Duplicated item"];
+      });
+      return {
+        result: false,
+        errors,
+      };
+    }
+
+    return {
+      result: true,
+    };
   };
 
   // const ExhaustiveList = {
